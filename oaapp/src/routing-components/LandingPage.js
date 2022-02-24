@@ -10,13 +10,18 @@ import { ActionButton } from '../presentational-components/Button';
 import { PasswordInput, TextInput } from "../presentational-components/Input";
 import { TitleText } from "../presentational-components/Text";
 import { Container } from '@material-ui/core';
+import background from '../img/airplane.png';
 
 const useStyles = makeStyles((theme) => ({
+	container: {
+		backgroundImage: '../img/airplane.png',
+	},
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		
 	},
 	avatar: {
 		margin: theme.spacing(1),
@@ -48,8 +53,8 @@ export default function LandingPage() {
     };
 
     return (
-        <React.Fragment>
-            <Container maxWidth = "xs">
+        <React.Fragment className="container">
+            <Container maxWidth = "xs" >
 				<CssBaseline/>
 				<div className = { classes.paper }>
 					<Avatar className = { classes.avatar }>
