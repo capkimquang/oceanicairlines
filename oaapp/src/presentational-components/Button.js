@@ -18,11 +18,11 @@ export function ActionButton({ value, onClick }) {
 	);
 }
 
-export function IconActionButton({ disabled, icon, onClick }) {
+export function IconActionButton({ disabled, icon, onClick, size }) {
 	const handleClick = () => onClick();
 
 	return (
-		<IconButton disabled = { disabled } color = "primary" onClick = { () => handleClick() }>
+		<IconButton disabled = { disabled } size = { size } color = "primary" onClick = { () => handleClick() }>
 			{ icon }
 		</IconButton>
 	);

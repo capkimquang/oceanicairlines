@@ -13,8 +13,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-
-
+import EditIcon from '@mui/icons-material/Edit';
+import { IconActionButton } from '../presentational-components/Button';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 let columns = [
     {
@@ -80,8 +82,16 @@ export default function Employees() {
         }
     ]);
 
-  const handleNewOrderClick = () => {
-    navigate("/order/create");
+  const handleEditButton = () => {
+    navigate("/employee/modify");
+  } 
+
+  const handleResetButton = () => {
+
+  }
+
+  const handleRemoveButton = () => {
+
   }
 
   return (
@@ -101,6 +111,9 @@ export default function Employees() {
                                       {column.label}
                                     </TableCell>
                                 ))}
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -114,6 +127,15 @@ export default function Employees() {
                                                 </TableCell>
                                             );
                                         })}
+                                        <TableCell>
+                                            <IconActionButton size = 'small' icon = {<EditIcon />} onClick = { () => handleEditButton() } />
+                                        </TableCell>
+                                        <TableCell>
+                                            <IconActionButton disabled size = 'small' icon = {<LockResetIcon />} onClick = { () => handleResetButton() } />
+                                        </TableCell>
+                                        <TableCell>
+                                            <IconActionButton disabled size = 'small' icon = {<PersonRemoveIcon />} onClick = { () => handleRemoveButton() } />
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
