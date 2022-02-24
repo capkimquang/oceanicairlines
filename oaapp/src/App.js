@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./routing-components/LandingPage";
 import "./App.css";
 import HomePage from "./routing-components/HomePage";
-import ResponsiveAppBar from "./Appbar/Appbar";
+import ResponsiveAppBar from "./container-components/Appbar";
 import React from "react";
 
 function App() {
