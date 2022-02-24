@@ -46,9 +46,10 @@ export default function LandingPage() {
         event.preventDefault();
         setSignInInfo({ ...signInInfo, [prop]: event.target.value });
     };
+
     const handleSignInClick = () => {
         if (signInInfo['username'] == 'test@netcompany.com' && signInInfo['password'] == 'test') {
-            navigate("/home/");
+            navigate("/home");
         }
     };
 
@@ -62,7 +63,7 @@ export default function LandingPage() {
 					</Avatar>
 					<TitleText value = "Sign In" fontSize = "18px"/>
 					<form className = { classes.form }>
-						<Grid container>
+                    <Grid sx = {{ flexGrow: 1 }} container justifyContent = 'center' spacing = {2}>
 							<Grid item xs = {12} sm = {12}>
 								<TextInput label = "Username" name = "username"
 										   value = { signInInfo['username'] }
