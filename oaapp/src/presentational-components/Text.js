@@ -3,12 +3,11 @@ import Typography from "@material-ui/core/Typography";
 import { Link as RouteLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 
-export function TitleText({ value, fontSize }) {
+export function TitleText({ value, fontSize, color }) {
 	return (
 		<Typography noWrap
-					color = 'inherit'
 					variant = 'inherit'
-					style = {{ fontWeight: 'bold', fontSize: fontSize }}
+					style = {{ fontWeight: 'bold', fontSize: fontSize, color: color }}
 		>
 			{ value }
 		</Typography>
