@@ -73,6 +73,10 @@ export default function ResponsiveAppBar() {
     navigate("/orders");
   };
 
+  const handleEmployeesClick = () => {
+    navigate("/employees");
+  }
+
   return (
     <AppBar position="static" color="default">
       <Container maxWidth="xl">
@@ -131,7 +135,7 @@ export default function ResponsiveAppBar() {
                 Order
               </Button>
               <Button
-                onClick={() => handleOrdersClick()}
+                onClick={() => handleEmployeesClick()}
                 sx={{
                   my: 2,
                   color: "primary",
