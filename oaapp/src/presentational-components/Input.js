@@ -65,7 +65,7 @@ export function SelectInput({ label, name, choices, size, disabled, onChange }) 
 
 	return (
 		<FormControl fullWidth>
-			<InputLabel id={ name }>{ label }</InputLabel>
+			<InputLabel style = {{paddingLeft: '7%'}} id={ name }>{ label }</InputLabel>
 			<Select
 				required fullWidth select
 				variant = "outlined"

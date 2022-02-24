@@ -78,9 +78,9 @@ export default function TableToolbar({ title, buttonIcon, buttonText, onClick })
 
     return (
         <Toolbar>
-            <Typography className={classes.title} variant="h6" color="primary" noWrap>
+            {/* <Typography className={classes.title} variant="h6" color="primary" noWrap>
                 { title }
-            </Typography>
+            </Typography> */}
             <div className={classes.newButton}>
             <Button variant="contained" endIcon={buttonIcon} onClick = { () => handleNewOrderClick() }>
                 {buttonText}
