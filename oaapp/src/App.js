@@ -6,6 +6,7 @@ import React from "react";
 import Dashboard from "./routing-components/Dashboard";
 import CreateOrder from "./routing-components/CreateOrder";
 import Orders from "./routing-components/Orders";
+import Employees from "./routing-components/Employees";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/orders" element = {<Orders />} />
           <Route exact path="/order/create" element={<CreateOrder />} />
+          <Route exact path="/employees" element = {<Employees />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
