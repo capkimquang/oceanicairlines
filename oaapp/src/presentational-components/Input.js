@@ -3,14 +3,14 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-export function TextInput({ size, label, name, value, onChange }) {
+export function TextInput({ size, label, name, value, onChange, disabled }) {
 	let handleChange = (event) => onChange(event);
 
 	return (
 		<TextField
 			required fullWidth autoFocus
+			disabled = { disabled }
 			variant = "outlined"
-			margin = "normal"
 			size = { size }
 			id = { name }
 			label = { label }
@@ -28,7 +28,6 @@ export function PasswordInput({ label, name, value, onChange }) {
 		<TextField
 			required fullWidth autoFocus
 			variant = "outlined"
-			margin = "normal"
 			type = "password"
 			id = { name }
 			label = { label }
@@ -44,7 +43,6 @@ export function SelectInput({ label, name, choices }) {
 		<Select
 			required fullWidth select
 			variant = "outlined"
-			margin = "normal"
 			id = { name }
 			label = { label }
 		>
