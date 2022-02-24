@@ -11,11 +11,35 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { TitleText } from '../presentational-components/Text';
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import { useNavigate } from 'react-router-dom';
+import { Link as RouteLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar = () => {
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+      flexWrap: 'wrap',
+  },
+  toolbarTitle: {
+      flexGrow: 1,
+      textDecoration: 'none'
+  },
+  link: {
+      margin: theme.spacing(1, 1.5),
+  }
+}));
+
+export default function ResponsiveAppBar() {
+  const classes = useStyles();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -34,18 +58,26 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const handleOrdersClick = () => {
+    navigate('/orders');
+  }
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+        <Link component = { RouteLink } to = '/' underline = 'none'>
           <Typography
+            color = 'secondary'
             variant="h6"
             noWrap
             component="div"
+            fontWeight = "bold"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            OCEANIC AIRLINES
           </Typography>
+        </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -83,24 +115,8 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button onClick = { () => handleOrdersClick() } sx={{ my: 2, color: 'white', display: 'block' }}>Orders</Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -137,4 +153,3 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;

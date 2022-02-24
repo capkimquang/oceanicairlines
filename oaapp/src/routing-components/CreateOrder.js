@@ -10,8 +10,9 @@ import { ActionButton } from '../presentational-components/Button';
 import { Container, Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Table, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
-import { TextInput } from '../presentational-components/Input';
+import { SelectInput, TextInput, TextInputWithValidation } from '../presentational-components/Input';
 import { Text } from '../presentational-components/Text';
+import ErrorDialog from '../presentational-components/ErrorDialog';
 
 const availableroute = [
     {
@@ -44,6 +45,17 @@ const availableroute = [
     },
 ];
 
+const availablecity = [
+    {
+        cityCode: "CAI",
+        cityName: "Cairo"
+    },
+    { 
+        cityCode: "NYC",
+        cityName: 'New York City'
+    }
+];
+
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
@@ -72,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HomePage() {
+export default function CreateOrder() {
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -89,7 +101,21 @@ export default function HomePage() {
         typeofpackage: "",
         weight: ""
     });
-    const [error, setError] = useState(null);
+
+    const [packageInfoError, setPackageInfoError] = useState({
+       senderphone: false,
+       receiverphone: false,
+       departure: false,
+       arrival: false,
+       dimensionx: false,
+       dimensiony: false,
+       dimensionz: false,
+       typeofpackage: false,
+       weight: false 
+    });
+
+    const [error, setError] = useState(false);
+    const [errorDialog, setErrorDialog] = useState(false);
     const [routeInfo, setRouteInfo] = useState({
         departure: '',
         arrival: '',
@@ -102,6 +128,10 @@ export default function HomePage() {
     const handlePackageInfoChange = (prop) => (event) => {
         event.preventDefault();
         setPackageInfo({ ...packageInfo, [prop]: event.target.value });
+        if (prop == "dimensionx" || prop == "dimensiony" || prop == "dimensionz") {
+            setPackageInfoError({ ...packageInfoError, [prop]: (event.target.value >= 200)});
+            setError(true);
+        }
     };
 
     const handleRouteInfoChange = (event) => {
@@ -109,7 +139,27 @@ export default function HomePage() {
     }
 
     const handleConfirmButton = () => {
-        setConfirmScreen(true);
+        let requiredField = false;
+        for (const key in packageInfo) {
+            if (packageInfo[key] == "") requiredField = true;
+        }
+
+        if (packageInfo['arrival'] == packageInfo['departure']) {
+            console.log('hello');
+            setError(true);
+            console.log(error);
+        }
+
+        // check not error
+        if (error || requiredField) {
+            // check require
+            setErrorDialog(true);
+        } else {
+            console.log(packageInfo);
+            setConfirmScreen(true);
+        }
+
+
     };
 
     const handleCreateOrderButton = () => {
@@ -121,8 +171,13 @@ export default function HomePage() {
         setConfirmScreen(false);
     }
 
+    const handleErrorDialog = () => {
+        setErrorDialog(false);
+    }
+
     return (
         <React.Fragment>
+            <ErrorDialog open = { errorDialog } onClose = { () => handleErrorDialog() } error = "Please check all the input again. Either missing required field or wrong format." />
             <Container maxWidth = "lg">
                 <CssBaseline />
                 <div>image</div>
@@ -139,7 +194,7 @@ export default function HomePage() {
                                                         onChange = { handlePackageInfoChange('sendername') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {4}>
-                                            <TextInput label = "Sender Phone" name = "senderphone" size = "small"
+                                            <TextInputWithValidation label = "Sender Phone" name = "senderphone" size = "small"
                                                         value = { packageInfo['senderphone'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('senderphone') } />
                                         </Grid>
@@ -149,42 +204,45 @@ export default function HomePage() {
                                                         onChange = { handlePackageInfoChange('receivername') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {4}>
-                                            <TextInput label = "Receiver Phone" name = "receiverphone" size = "small"
+                                            <TextInputWithValidation label = "Receiver Phone" name = "receiverphone" size = "small"
                                                         value = { packageInfo['receiverphone'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('receiverphone') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {6}>
-                                            <TextInput label = "Departure" name = "departure" size = "small"
-                                                        value = { packageInfo['departure'] } disabled = { confirmScreen }
+                                            <SelectInput label = "Departure" name = "departure" size = "small"
+                                                        choices = { availablecity } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('departure') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {6}>
-                                            <TextInput label = "Arrival" name = "arrival" size = "small"
-                                                        value = { packageInfo['arrival'] } disabled = { confirmScreen }
+                                            <SelectInput label = "Arrival" name = "arrival" size = "small"
+                                                        choices = { availablecity } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('arrival') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {4}>
-                                            <TextInput label = "Weight" name = "weight" size = "small"
+                                            <TextInputWithValidation label = "Weight" name = "weight" size = "small"
                                                         value = { packageInfo['weight'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('weight') } />
                                         </Grid>
                                         <Grid item xs = {12} sm = {8}>
-                                            <TextInput label = "Type of Package" name = "typeofpackage" size = "small"
+                                            <TextInputWithValidation label = "Type of Package" name = "typeofpackage" size = "small"
                                                         value = { packageInfo['typeofpackage'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('typeofpackage') } />
                                         </Grid>
                                         <Grid item xs = {4} sm = {4}>
-                                            <TextInput label = "Dimension (x)" name = "dimensionx" size = "small"
+                                            <TextInputWithValidation label = "Dimension (x)" name = "dimensionx" size = "small"
+                                                        error = { packageInfoError['dimensionx'] } helperText = 'Smaller than 200cm.'
                                                         value = { packageInfo['dimensionx'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('dimensionx') } />
                                         </Grid>
                                         <Grid item xs = {4} sm = {4}>
-                                            <TextInput label = "Dimension (y)" name = "dimensiony" size = "small"
+                                            <TextInputWithValidation label = "Dimension (y)" name = "dimensiony" size = "small"
+                                                        error = { packageInfoError['dimensiony'] } helperText = 'Smaller than 200cm.'
                                                         value = { packageInfo['dimensiony'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('dimensiony') } />
                                         </Grid>
                                         <Grid item xs = {4} sm = {4}>
-                                            <TextInput label = "Dimension (z)" name = "dimensionz" size = "small"
+                                            <TextInputWithValidation label = "Dimension (z)" name = "dimensionz" size = "small"
+                                                        error = { packageInfoError['dimensionz'] } helperText = 'Smaller than 200cm.'
                                                         value = { packageInfo['dimensionz'] } disabled = { confirmScreen }
                                                         onChange = { handlePackageInfoChange('dimensionz') } />
                                         </Grid>

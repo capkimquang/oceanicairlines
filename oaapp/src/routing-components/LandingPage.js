@@ -49,7 +49,7 @@ export default function LandingPage() {
 
     const handleSignInClick = () => {
         if (signInInfo['username'] == 'test@netcompany.com' && signInInfo['password'] == 'test') {
-            navigate("/home");
+            navigate("/dashboard");
         }
     };
 
