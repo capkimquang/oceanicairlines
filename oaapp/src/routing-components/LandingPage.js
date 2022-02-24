@@ -24,14 +24,20 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '800px'
   },
   signInForm: {
-	paddingTop: '200px'
+	  paddingTop: '35%'
+  },
+  avatarGroup: {
+    paddingTop: '10%'
+  },
+  button: {
+    paddingTop: '5%'
   },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "400px",
+    height: "450px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -39,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "80%",
+    paddingTop: '10%'
   }
 }));
 
@@ -68,13 +75,15 @@ export default function LandingPage() {
         <Grid>
           <img className = {classes.img} src = {background}  />
         </Grid>
-        <Grid className = {classes.signInForm}>
-          <Container maxWidth="xs">
+        <Grid >
+          <Container className = {classes.signInForm} maxWidth="xs">
             <CssBaseline />
             <Paper className={classes.paper}>
+              <div className = {classes.avatarGroup}>
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
+              </div>
               <TitleText value="Sign In" fontSize="18px" />
               <form className={classes.form}>
                 <Grid
@@ -100,10 +109,12 @@ export default function LandingPage() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={12}>
+                    <div className = {classes.button}>
                     <ActionButton
                       value="Sign In"
                       onClick={() => handleSignInClick()}
                     />
+                    </div>
                   </Grid>
                 </Grid>
               </form>
