@@ -66,19 +66,19 @@ export default function Employees() {
         {
         id: '1',
         name: 'hello1',
-        role: 'hellooo1'
+        role: 'EMPLOYEE'
         },    {
         id: '2',
         name: 'hello2',
-        role: 'hellooo2'
+        role: 'ADMIN'
         },    {
         id: '3',
         name: 'hello3',
-        role: 'hellooo3'
+        role: 'EMPLOYEE'
         },    {
         id: '4',
         name: 'hello4',
-        role: 'hellooo4'
+        role: 'SUPER ADMIN'
         }
     ]);
 
