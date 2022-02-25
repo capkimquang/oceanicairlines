@@ -15,12 +15,14 @@ import {
   Button,
   Typography,
   makeStyles,
+  Paper,
 } from "@material-ui/core";
 import { allOrders } from "../service-components/allOrders";
 import { TitleText } from "../presentational-components/Text";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
+import background from "../img/delivery5.jpg";
 
 let columns = [
   {
@@ -97,14 +99,26 @@ let columns = [
   },
 ];
 const useStyles = makeStyles((theme) => ({
-    title: {
-        padding: '2%',
-        textAlign: "center",
-      },
+  title: {
+    padding: "2%",
+    textAlign: "center",
+  },
+  background: {
+    backgroundImage: `url(${Image})`,
+    maxWWidth: '1200px'
+  },
+  img: {
+    maxWidth: '1800px'
+  },
+  imgContainer: {
+    display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
+  }
 }));
 
 export default function Orders() {
-    const classes = useStyles();
+  const classes = useStyles();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([
     {
@@ -134,15 +148,11 @@ export default function Orders() {
   };
 
   return (
-    <React.Fragment>
-         <div className={classes.title}>
-                  {" "}
-                  <TitleText
-                    value="CREATE ORDER"
-                    fontSize="28px"
-                    color="#FF5C8D"
-                  />
-                </div>
+    <div className = {classes.background}>
+      <div className={classes.title}>
+        {" "}
+        <TitleText value="ORDER MANAGEMENT" fontSize="28px" color="#FF5C8D" />
+      </div>
       <Container maxWidth="lg">
         <TableToolbar
           buttonIcon={<AddIcon />}
@@ -178,6 +188,9 @@ export default function Orders() {
           </Table>
         </TableContainer>
       </Container>
-    </React.Fragment>
+      <div className = {classes.imgContainer}>
+      <img className = {classes.img} src = {background}  />
+      </div>
+    </div>
   );
 }
