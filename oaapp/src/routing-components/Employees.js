@@ -173,6 +173,9 @@ export default function Employees() {
                     </Table>
                 </TableContainer>
               </Container>
+              <div className = {classes.imgContainer}>
+      <img className = {classes.img} src = {background2}  />
+      </div>
             </React.Fragment>
   );
 }
