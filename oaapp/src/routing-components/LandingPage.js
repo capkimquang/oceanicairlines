@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '800px'
   },
   signInForm: {
-	  paddingTop: '35%'
+	  paddingTop: '25%'
   },
   avatarGroup: {
     paddingTop: '10%'
