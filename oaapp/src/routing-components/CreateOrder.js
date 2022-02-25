@@ -34,32 +34,14 @@ import background from "../img/map.png";
 
 const availableroute = [
   {
-    departure: "ABC",
-    arrival: "DEF",
-    departureDate: "22/02/2022",
-    arrivalDate: "25/02/2022",
-    price: "110",
+    departureDate: "25/02/2022",
+    arrivalDate: "28/02/2022",
+    price: 1800,
   },
   {
-    departure: "ABC",
-    arrival: "DEF",
-    departureDate: "22/02/2022",
-    arrivalDate: "25/02/2022",
-    price: "110",
-  },
-  {
-    departure: "ABC",
-    arrival: "DEF",
-    departureDate: "22/02/2022",
-    arrivalDate: "25/02/2022",
-    price: "110",
-  },
-  {
-    departure: "ABC",
-    arrival: "DEF",
-    departureDate: "22/02/2022",
-    arrivalDate: "25/02/2022",
-    price: "110",
+    departureDate: "25/02/2022",
+    arrivalDate: "26/02/2022",
+    price: 2500,
   },
 ];
 
@@ -71,6 +53,22 @@ const availablecity = [
   {
     cityCode: "NYC",
     cityName: "New York City",
+  },
+  {
+    cityCode: "TUR",
+    cityName: "Turin",
+  },
+  {
+    cityCode: "EGY",
+    cityName: "Egypt",
+  },
+  {
+    cityCode: "MAL",
+    cityName: "Malibu",
+  },
+  {
+    cityCode: "VTU",
+    cityName: "Vungtau",
   },
 ];
 
@@ -126,6 +124,15 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
 }));
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+  >
+    •
+  </Box>
+);
 
 export default function CreateOrder() {
   const classes = useStyles();
@@ -220,10 +227,10 @@ export default function CreateOrder() {
   return (
     <React.Fragment>
       <Grid className={classes.container} container spacing={2}>
-        <Grid>
+        <Grid item xs = {12} md = {6}>
           <img className={classes.img} src={background} />
         </Grid>
-        <Grid>
+        <Grid item xs = {12} md = {6}>
           <Container maxWidth="lg">
             <CssBaseline />
             <Grid
@@ -367,42 +374,53 @@ export default function CreateOrder() {
                       onChange={handlePackageInfoChange("dimensionz")}
                     />
                   </Grid>
+                  <Grid item xs = {12}>
+                    <Grid container spacing = {2}>
+                      <Grid item xs = {12} md = {6}>
+                        <Card sx={{ minWidth: 275 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
+                              Cheapest
+                            </Typography>
+                            <Typography variant="h5" component="div">
+                              {packageInfo['departure']}{bull}{packageInfo['arrival']}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              ${availableroute[0]['price']}
+                            </Typography>
+                            <Typography variant="body2">
+                              Departure: {availableroute[0]['departureDate']}
+                              <br />
+                              Arrival: {availableroute[0]['arrivalDate']}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                      <Grid item xs = {12} md = {6}>
+                        <Card sx={{ minWidth: 275 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
+                              Fastest
+                            </Typography>
+                            <Typography variant="h5" component="div">
+                              {packageInfo['departure']}{bull}{packageInfo['arrival']}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              ${availableroute[1]['price']}
+                            </Typography>
+                            <Typography variant="body2">
+                              Departure: {availableroute[1]['departureDate']}
+                              <br />
+                              Arrival: {availableroute[1]['arrivalDate']}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-            <div className={classes.center}>
-              <Grid item xs={12} md={6}>
-                <Paper variant="outlined" classes={classes.paper}>
-                  {/*WIP: show only the choosen route when submit*/}
-                  <Table
-                    sx={{ minWidth: 650 }}
-                    size="small"
-                    aria-label="a dense table"
-                  >
-                    <TableBody>
-                      {availableroute.map((row) => (
-                        <TableRow
-                          key={`${row.departure}-${row.arrival}`}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.departure}
-                          </TableCell>
-                          <TableCell align="right">{row.arrival}</TableCell>
-                          <TableCell align="right">
-                            {row.departureDate}
-                          </TableCell>
-                          <TableCell align="right">{row.arrivalDate}</TableCell>
-                          <TableCell align="right">{row.price}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </Paper>
-              </Grid>
-            </div>
             {confirmScreen ? (
               <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12} md={3}>

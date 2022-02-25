@@ -92,19 +92,19 @@ export default function Employees() {
     const [employees, setEmployees] = useState([
         {
         id: '1',
-        name: 'hello1',
+        name: 'Doan Nguyen',
         role: 'EMPLOYEE'
         },    {
         id: '2',
-        name: 'hello2',
+        name: 'Joe Smith',
         role: 'ADMIN'
         },    {
         id: '3',
-        name: 'hello3',
+        name: 'Kathick Bolamin',
         role: 'EMPLOYEE'
         },    {
         id: '4',
-        name: 'hello4',
+        name: 'Super Admin',
         role: 'SUPER ADMIN'
         }
     ]);
